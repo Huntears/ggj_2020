@@ -77,12 +77,9 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
-	cp -r include/ ../../
-	mv $(NAME) ../../
 
 clean:
 	-rm -f $(OBJ)
 
 fclean: clean
-	-rm -f ../../$(NAME)
 	-rm -f $(INC)
