@@ -1,6 +1,7 @@
 SHELL	=	bash
 
-SRC 	= src/game_src/scene/scene_game.c \
+SRC 	=	src/game_src/scene/scene_game.c \
+			src/game_src/component/cpt_box_collider.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
