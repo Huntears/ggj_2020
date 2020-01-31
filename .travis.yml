@@ -1,0 +1,46 @@
+dist: trusty
+language: c
+compiler: gcc
+services:
+  - docker
+
+stages:
+  - build
+  - tests
+
+notifications:
+  email:
+    recipients:
+      - alexandre.flion@epitech.eu
+      - huntearsgaming@gmail.com
+      - vitor-hugo.moreira-reis@epitech.eu
+      - alexandre.descoins@gmail.com
+      - alexia.legrand@epitech.eu
+    on_success: never
+    on_failure: always
+
+after_success:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
+
+jobs:
+  include:
+    - stages: build
+      name: "Build"
+      if: type != cron
+      install:
+        - docker pull epitechcontent/epitest-docker
+      script:
+        - docker run -v $PWD:/build epitechcontent/epitest-docker bash -c "cd build && make fclean && make && make re"
+    - stages: tests
+      name: "Tests"
+      if: type != cron
+      install:
+        - docker pull epitechcontent/epitest-docker
+      script:
+        - docker run -v $PWD:/build epitechcontent/epitest-docker bash -c "cd build && make fclean && make tests_run && make re_tests"
