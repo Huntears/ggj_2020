@@ -1,6 +1,6 @@
 SHELL	=	bash
 
-SRC 	=	src/game_src/game.c	\
+SRC 	= src/game_src/scene/scene_game.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -10,7 +10,7 @@ MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
 CFLAGS	=	-I./include -Wall -Wextra -Werror
 
-LFLAGS	=	-L./lib -lcsfml-graphics -ldragon
+LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -ldragon
 
 TARGET	=	game
 
