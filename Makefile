@@ -10,7 +10,9 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/entities/ent_decor.c	\
 			src/game_src/system/sys_player_control.c \
 			src/game_src/system/sys_camera_follow_player.c	\
-			src/game_src/read_csv_from_file.c
+			src/game_src/read_csv_from_file.c	\
+			src/game_src/system/sys_change_scene.c	\
+			src/game_src/scene/scene_past.c	\
 
 OBJ 	=	$(SRC:.c=.o)
 
