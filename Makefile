@@ -16,6 +16,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/read_csv_from_file.c \
 			src/game_src/entities/ent_object.c \
 			src/game_src/component/cpt_box_trigger.c \
+			src/game_src/component/cpt_entity.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -23,7 +24,7 @@ MAIN_SRC	=	src/main.c 	\
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I./include -W -Wall -Wextra -Werror
+CFLAGS	=	-I./include -W -Wall -Wextra -Werror -g3
 
 LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -ldragon
 

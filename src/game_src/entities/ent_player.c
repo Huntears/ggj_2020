@@ -34,9 +34,11 @@ dg_entity_t *ent_player(int x, int y)
     sfVector2f scale = {3, 3};
 
     dg_entity_add_component(entity, cpt_box_collider(0, 14 * 3, 32 * 3, 50 * 3));
+    dg_entity_add_component(entity, cpt_box_trigger(0, 14 * 3, 32 * 3, 50 * 3));
     dg_entity_add_component(entity, cpt_rigid_body(1, 1));
     dg_entity_add_component(entity, dg_cpt_pos(x, y));
     dg_entity_add_component(entity, dg_cpt_sprite(&scale));
     dg_entity_add_component(entity, dg_cpt_animator(&set_player_animator));
+    dg_entity_add_component(entity, cpt_inventory());
     return entity;
 }
