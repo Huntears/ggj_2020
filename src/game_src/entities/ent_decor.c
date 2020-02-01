@@ -5,7 +5,7 @@ dg_entity_t *ent_decor(int x, int y)
 {
     dg_entity_t *entity = dg_entity_create("decor");
 
-    dg_entity_add_component(entity, cpt_box_collider(0, 0, 32, 32));
+    dg_entity_add_component(entity, cpt_box_collider(0, 0, 300, 50));
     dg_entity_add_component(entity, dg_cpt_pos(x, y));
     dg_entity_add_component(entity, dg_cpt_sprite(NULL));
     sfSprite *sprite = (sfSprite *) dg_entity_get_component(entity, "sprite");

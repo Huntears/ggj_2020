@@ -12,6 +12,7 @@ dg_scene_t *scene_game_create(void)
     dg_scene_add_ent(scene_game, ent_player(0, 0));
     dg_scene_add_ent(scene_game, ent_player(100, 100));
     dg_scene_add_ent(scene_game, ent_decor(0, 300));
+    dg_scene_add_ent(scene_game, ent_decor(100, 250));
 
     dg_scene_add_ent(scene_game, dg_ent_camera(0, 0));
 
@@ -20,5 +21,6 @@ dg_scene_t *scene_game_create(void)
 
     dg_scene_add_sys(scene_game, dg_system_create(&dg_sys_animator));
     dg_scene_add_sys(scene_game, dg_system_create(&dg_sys_render));
+    dg_scene_add_sys(scene_game, dg_system_create(&system_player_control));
     return scene_game;
 }

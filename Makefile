@@ -8,6 +8,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/system/sys_gravity.c \
 			src/game_src/rigid_body.c \
 			src/game_src/entities/ent_decor.c	\
+			src/game_src/system/sys_player_control.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -17,7 +18,7 @@ MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
 CFLAGS	=	-I./include -W -Wall -Wextra -Werror
 
-LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -ldragon
+LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -ldragon
 
 TARGET	=	game
 
