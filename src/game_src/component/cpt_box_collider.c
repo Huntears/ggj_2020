@@ -15,19 +15,21 @@ static void absolute_collision(sfFloatRect *rect1, sfFloatRect *rect2, sfVector2
 
 static float calc_surface(sfFloatRect rect, sfFloatRect sur, int side)
 {
+    float tr = 0;
+
     if (side == 1 && sur.left == rect.left) {
-        return sur.height;
+        tr = sur.height;
     }
-    if (side == 2 && sur.left + sur.width == rect.left + rect.width) {
-        return sur.height;
+    else if (side == 2 && sur.left + sur.width == rect.left + rect.width) {
+        tr = sur.height;
     }
     if (side == 3 && sur.top == rect.top) {
-        return sur.width;
+        tr = sur.width;
     }
     if (side == 4 && sur.top + sur.height == rect.top + rect.height) {
-        return sur.width;
+        tr = sur.width;
     }
-    return 0;
+    return tr;
 }
 
 static int biggest_surface(sfFloatRect rect, sfFloatRect sur)
@@ -37,7 +39,7 @@ static int biggest_surface(sfFloatRect rect, sfFloatRect sur)
     int index = 0;
 
     for (int i = 0; i < 4; i++) {
-        if (collision[i] >= max) {
+        if (collision[i] > max) {
             max = collision[i];
             index = i;
         }
@@ -61,6 +63,10 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
     rect2->left += pos2->x;
     rect2->top += pos2->y;
     if (!sfFloatRect_intersects(rect1, rect2, &rect_test)) {
+        absolute_collision(rect1, rect2, pos1, pos2);
+        return 0;
+    }
+    if (rect_test.width < 3 && rect_test.height < 3 ) {
         absolute_collision(rect1, rect2, pos1, pos2);
         return 0;
     }
