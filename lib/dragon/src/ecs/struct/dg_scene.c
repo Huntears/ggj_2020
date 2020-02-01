@@ -9,14 +9,13 @@
 #include "dg_scene.h"
 #include "epitech_tools.h"
 
-dg_scene_t *dg_scene_create(void)
+dg_scene_t *dg_scene_create(char *name)
 {
     dg_scene_t *scene = malloc(sizeof(dg_scene_t));
 
     if (!scene)
         return 0;
-    scene->camera.x = 0;
-    scene->camera.y = 0;
+    scene->name = name;
     scene->entities = 0;
     scene->systems = 0;
     return scene;

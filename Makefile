@@ -5,6 +5,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/entities/ent_player.c	\
 			src/game_src/system/sys_set_pos_sprite.c	\
 			src/game_src/component/cpt_rigid_body.c \
+			src/game_src/component/cpt_catchable.c \
 			src/game_src/system/sys_gravity.c \
 			src/game_src/rigid_body.c \
 			src/game_src/entities/ent_decor.c	\
@@ -13,6 +14,9 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/read_csv_from_file.c	\
 			src/game_src/system/sys_change_scene.c	\
 			src/game_src/scene/scene_past.c	\
+			src/game_src/read_csv_from_file.c \
+			src/game_src/entities/ent_object.c \
+			src/game_src/component/cpt_box_trigger.c \
 
 OBJ 	=	$(SRC:.c=.o)
 

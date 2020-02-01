@@ -17,23 +17,23 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
     (void)entities;
     (void)dt;
     for (dg_array_t *ent = *entities; ent; ent = ent->next) {
-        tmp = box_collider_test(entity, (dg_entity_t *)(ent->data));
+        tmp = box_collider_test(entity, (dg_entity_t *)(ent->data), NULL);
         if (tmp)
             collisions[tmp - 1] = 1;
     }
     if (!dg_system_require(entity, 3, "animator", "rigid_body", "box_collider") || strcmp(entity->name, "player"))
         return;
-    if (sfKeyboard_isKeyPressed(sfKeyRight)) {
+    if (sfKeyboard_isKeyPressed(sfKeyRight) || sfKeyboard_isKeyPressed(sfKeyD)) {
         rb->strengh.x = 40;
         dg_animator_set_animation(animator, "right");
-    } else if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
+    } else if (sfKeyboard_isKeyPressed(sfKeyLeft) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyA)) {
         rb->strengh.x = -40;
         dg_animator_set_animation(animator, "left");
     } else {
         rb->strengh.x = 0;
         dg_animator_set_animation(animator, "up");
     }
-    if (sfKeyboard_isKeyPressed(sfKeyUp) && collisions[3]) {
+    if ((sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyW)|| sfKeyboard_isKeyPressed(sfKeySpace)) && collisions[3]) {
         rb->strengh.y = -100;
     }
 }
