@@ -10,4 +10,6 @@ dg_entity_t *ent_object(char *, dg_spritesheet_t *, sfVector2f, sfVector2f);
 
 void grab(inventory_t *, dg_entity_t *, dg_array_t **, int);
 
+void ungrab(inventory_t *, dg_entity_t *, dg_array_t **, int);
+
 #endif /* !ENTITY_H_ */

@@ -6,6 +6,24 @@
 #include "libdragon.h"
 #include "inventory.h"
 
+void ungrab(inventory_t *inv, dg_entity_t *entity, dg_array_t **entities, int id)
+{
+    sfVector2u *pos = 0;
+    sfVector2u *npos = (sfVector2u *)dg_entity_get_component(entity, "pos");
+
+    if (id != 1) {
+        pos = (sfVector2u *)dg_entity_get_component(inv->left, "pos");
+        dg_arr_add_begin(entities, inv->left);
+        inv->left = 0;
+    } else {
+        pos = (sfVector2u *)dg_entity_get_component(inv->right, "pos");
+        dg_arr_add_begin(entities, inv->right);
+        inv->right = 0;
+    }
+    pos->x = npos->x;
+    pos->y = npos->y;
+}
+
 void grab(inventory_t *inv, dg_entity_t *entity, dg_array_t **entities, int id)
 {
     int index = 0;
@@ -14,7 +32,7 @@ void grab(inventory_t *inv, dg_entity_t *entity, dg_array_t **entities, int id)
 
     for (; tmp && tmp->data != entity; tmp = tmp->next, index++);
     data = dg_arr_remove_at(entities, index);
-    if (id == 0)
+    if (id == 1)
         inv->left = (dg_entity_t *)(data);
     else
         inv->right = (dg_entity_t *)(data);

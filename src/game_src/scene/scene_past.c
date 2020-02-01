@@ -10,7 +10,7 @@ int **read_csv_from_file(char *filepath);
 dg_scene_t *scene_past_create(void)
 {
     dg_scene_t *scene_game = dg_scene_create("past");
-    int **map = read_csv_from_file("map/testmap");
+    int **map = read_csv_from_file("map/map_past.csv");
 
     if (!map)
         return (NULL);
