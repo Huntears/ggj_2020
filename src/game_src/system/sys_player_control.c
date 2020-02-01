@@ -24,16 +24,16 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
     if (!dg_system_require(entity, 3, "animator", "rigid_body", "box_collider") || strcmp(entity->name, "player"))
         return;
     if (sfKeyboard_isKeyPressed(sfKeyRight)) {
-        rb->strengh.x = 20;
+        rb->strengh.x = 40;
         dg_animator_set_animation(animator, "right");
     } else if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
-        rb->strengh.x = -20;
+        rb->strengh.x = -40;
         dg_animator_set_animation(animator, "left");
     } else {
         rb->strengh.x = 0;
         dg_animator_set_animation(animator, "up");
     }
     if (sfKeyboard_isKeyPressed(sfKeyUp) && collisions[3]) {
-        rb->strengh.y = -50;
+        rb->strengh.y = -100;
     }
 }
