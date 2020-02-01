@@ -52,7 +52,7 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
         dg_animator_set_animation(animator, "up");
     }
     if ((sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyW)|| sfKeyboard_isKeyPressed(sfKeySpace)) && collisions[3]) {
-        rb->strengh.y = -100;
+        rb->strengh.y = -64;
     }
     touched = touch_an_object(entity, entities);
     if (sfMouse_isButtonPressed(sfMouseLeft) && touched) {
