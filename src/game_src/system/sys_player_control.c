@@ -17,7 +17,7 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
     (void)entities;
     (void)dt;
     for (dg_array_t *ent = *entities; ent; ent = ent->next) {
-        tmp = box_collider_test(entity, (dg_entity_t *)(ent->data));
+        tmp = box_collider_test(entity, (dg_entity_t *)(ent->data), NULL);
         if (tmp)
             collisions[tmp - 1] = 1;
     }

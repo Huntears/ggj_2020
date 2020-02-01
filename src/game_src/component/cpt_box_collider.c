@@ -48,7 +48,7 @@ static int biggest_surface(sfFloatRect rect, sfFloatRect sur)
 }
 
 //1: left, 2: right, 3:top, 4:bottom
-int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
+int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2, int *depth)
 {
     sfFloatRect *rect1 = (sfFloatRect *)(dg_entity_get_component(ent1, "box_collider"));
     sfFloatRect *rect2 = (sfFloatRect *)(dg_entity_get_component(ent2, "box_collider"));
@@ -58,6 +58,8 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
 
     if (!dg_system_require(ent1, 2, "box_collider", "pos") || !dg_system_require(ent2, 2, "box_collider", "pos") || ent1 == ent2)
         return 0;
+    if (depth)
+        *depth = 0;
     rect1->left += pos1->x;
     rect1->top += pos1->y;
     rect2->left += pos2->x;
@@ -72,17 +74,21 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
     }
     if (biggest_surface(*rect1, rect_test) == 1) {
         absolute_collision(rect1, rect2, pos1, pos2);
+        if (depth) *depth = rect_test.width;
         return 1;
     }
     if (biggest_surface(*rect1, rect_test) == 2) {
         absolute_collision(rect1, rect2, pos1, pos2);
+        if (depth) *depth = -rect_test.width;
         return 2;
     }
     if (biggest_surface(*rect1, rect_test) == 3) {
         absolute_collision(rect1, rect2, pos1, pos2);
+        if (depth) *depth = rect_test.height;
         return 3;
     }
     absolute_collision(rect1, rect2, pos1, pos2);
+    if (depth) *depth = -rect_test.height;
     return 4;
 }
 
