@@ -5,24 +5,17 @@
 #include "system.h"
 #include "libdragon.h"
 
-static int map[9][10] = {{16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 16},
-                         {16, 16, 16, 16, 16, 16, 16, 16, 16, 16}};
+int **read_csv_from_file(char *filepath);
 
 dg_scene_t *scene_game_create(void)
 {
     dg_scene_t *scene_game = dg_scene_create();
+    int **map = read_csv_from_file("text.tmp");
 
     dg_scene_add_ent(scene_game, ent_player(100, 100));
 
-    for (int i = 0; i < 9; i++)
-        for (int z = 0; z < 10; z++)
+    for (int i = 0; map[i][0] != -2; i++)
+        for (int z = 0; map[i][z] != -1; z++)
             if (map[i][z])
                 dg_scene_add_ent(scene_game, ent_decor(z * 32 * 5, i * 32 * 5, map[i][z] - 1));
 
