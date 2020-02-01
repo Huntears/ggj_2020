@@ -10,7 +10,7 @@ int **read_csv_from_file(char *filepath);
 dg_scene_t *scene_game_create(void)
 {
     dg_scene_t *scene_game = dg_scene_create();
-    int **map = read_csv_from_file("text.tmp");
+    int **map = read_csv_from_file("map/testmap");
 
     dg_scene_add_ent(scene_game, ent_player(100, 100));
 
