@@ -10,7 +10,7 @@ dg_scene_t *scene_game_create(void)
     dg_scene_t *scene_game = dg_scene_create();
 
     dg_scene_add_ent(scene_game, ent_player(0, 0));
-    dg_scene_add_ent(scene_game, ent_player(100, 100));
+    //dg_scene_add_ent(scene_game, ent_player(100, 100));
     dg_scene_add_ent(scene_game, ent_decor(0, 300));
     dg_scene_add_ent(scene_game, ent_decor(100, 250));
 

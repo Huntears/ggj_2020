@@ -5,6 +5,46 @@
 #include <stdio.h>
 #include "libdragon.h"
 
+static void absolute_collision(sfFloatRect *rect1, sfFloatRect *rect2, sfVector2f *pos1, sfVector2f *pos2)
+{
+    rect1->left -= pos1->x;
+    rect1->top -= pos1->y;
+    rect2->left -= pos2->x;
+    rect2->top -= pos2->y;
+}
+
+static float calc_surface(sfFloatRect rect, sfFloatRect sur, int side)
+{
+    if (side == 1 && sur.left == rect.left) {
+        return sur.height;
+    }
+    if (side == 2 && sur.left + sur.width == rect.left + rect.width) {
+        return sur.height;
+    }
+    if (side == 3 && sur.top == rect.top) {
+        return sur.width;
+    }
+    if (side == 4 && sur.top + sur.height == rect.top + rect.height) {
+        return sur.width;
+    }
+    return 0;
+}
+
+static int biggest_surface(sfFloatRect rect, sfFloatRect sur)
+{
+    float collision[4] = {calc_surface(rect, sur, 1), calc_surface(rect, sur, 2), calc_surface(rect, sur, 3), calc_surface(rect, sur, 4)};
+    int max = 0;
+    int index = 0;
+
+    for (int i = 0; i < 4; i++) {
+        if (collision[i] >= max) {
+            max = collision[i];
+            index = i;
+        }
+    }
+    return index + 1;
+}
+
 //1: left, 2: right, 3:top, 4:bottom
 int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
 {
@@ -21,37 +61,22 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
     rect2->left += pos2->x;
     rect2->top += pos2->y;
     if (!sfFloatRect_intersects(rect1, rect2, &rect_test)) {
-        rect1->left -= pos1->x;
-        rect1->top -= pos1->y;
-        rect2->left -= pos2->x;
-        rect2->top -= pos2->y;
+        absolute_collision(rect1, rect2, pos1, pos2);
         return 0;
     }
-    if (rect_test.left < rect1->left) {
-        rect1->left -= pos1->x;
-        rect1->top -= pos1->y;
-        rect2->left -= pos2->x;
-        rect2->top -= pos2->y;
+    if (biggest_surface(*rect1, rect_test) == 1) {
+        absolute_collision(rect1, rect2, pos1, pos2);
         return 1;
     }
-    if (rect_test.left + rect_test.width > rect1->left + rect1->width) {
-        rect1->left -= pos1->x;
-        rect1->top -= pos1->y;
-        rect2->left -= pos2->x;
-        rect2->top -= pos2->y;
+    if (biggest_surface(*rect1, rect_test) == 2) {
+        absolute_collision(rect1, rect2, pos1, pos2);
         return 2;
     }
-    if (rect_test.top < rect1->top) {
-        rect1->left -= pos1->x;
-        rect1->top -= pos1->y;
-        rect2->left -= pos2->x;
-        rect2->top -= pos2->y;
+    if (biggest_surface(*rect1, rect_test) == 3) {
+        absolute_collision(rect1, rect2, pos1, pos2);
         return 3;
     }
-    rect1->left -= pos1->x;
-    rect1->top -= pos1->y;
-    rect2->left -= pos2->x;
-    rect2->top -= pos2->y;
+    absolute_collision(rect1, rect2, pos1, pos2);
     return 4;
 }
 
