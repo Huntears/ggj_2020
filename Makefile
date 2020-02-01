@@ -2,6 +2,9 @@ SHELL	=	bash
 
 SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/component/cpt_box_collider.c \
+			src/game_src/component/cpt_rigid_body.c \
+			src/game_src/system/sys_gravity.c \
+			src/game_src/rigid_body.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
