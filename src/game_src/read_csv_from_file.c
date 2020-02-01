@@ -100,10 +100,10 @@ int **read_csv_from_file(char *filepath)
             csv[i][x] = atoi(content[i] + j);
             for (; content[i][j] != ',' && content[i][j + 1] && content[i][j] != '\n'; j++);
         }
-        csv[i][x] = -1;
+        csv[i][x] = -2;
     }
     csv[i] = malloc(sizeof(int) * 1);
-    csv[i][0] = -2;
+    csv[i][0] = -3;
     for (int i = 0; content[i]; i++)
         free(content[i]);
     free(content);
