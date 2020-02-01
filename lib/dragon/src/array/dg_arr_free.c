@@ -37,7 +37,7 @@ void *dg_arr_remove_end(dg_array_t **list)
     if (!tmp->previous) {
         *list = 0;
     } else {
-        tmp->previous->next = 0;
+        tmp->previous->next = NULL;
         data = tmp->data;
     }
     free(tmp);
