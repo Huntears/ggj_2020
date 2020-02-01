@@ -69,7 +69,7 @@ INC_PATH = $(strip ../../include/)
 
 INC =	$(INC_PATH)libdragon.h		\
 
-CFLAGS =	-Iinclude
+CFLAGS =	-Iinclude -g3
 
 NAME	= libdragon.a
 
