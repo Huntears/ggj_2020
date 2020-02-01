@@ -9,4 +9,6 @@ int box_collider_test(dg_entity_t *, dg_entity_t *, int *);
 
 dg_component_t *cpt_rigid_body(float, float);
 
+dg_component_t *cpt_catchable(void);
+
 #endif /* !COMPONENT_H_ */
