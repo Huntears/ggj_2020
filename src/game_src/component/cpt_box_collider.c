@@ -12,9 +12,9 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
     sfFloatRect *rect2 = (sfFloatRect *)(dg_entity_get_component(ent2, "box_collider"));
     sfFloatRect rect_test = {0};
     sfVector2f *pos1 = (sfVector2f *)(dg_entity_get_component(ent1, "pos"));
-    sfVector2f *pos2 = (sfVector2f *)(dg_entity_get_component(ent1, "pos"));
+    sfVector2f *pos2 = (sfVector2f *)(dg_entity_get_component(ent2, "pos"));
 
-    if (!dg_system_require(ent1, 2, "box_collider", "pos") || !dg_system_require(ent2, 2, "box_collider", "pos"))
+    if (!dg_system_require(ent1, 2, "box_collider", "pos") || !dg_system_require(ent2, 2, "box_collider", "pos") || ent1 == ent2)
         return 0;
     rect1->left += pos1->x;
     rect1->top += pos1->y;
@@ -27,21 +27,21 @@ int box_collider_test(dg_entity_t *ent1, dg_entity_t *ent2)
         rect2->top -= pos2->y;
         return 0;
     }
-    if (rect_test.left <= rect1->left) {
+    if (rect_test.left < rect1->left) {
         rect1->left -= pos1->x;
         rect1->top -= pos1->y;
         rect2->left -= pos2->x;
         rect2->top -= pos2->y;
         return 1;
     }
-    if (rect_test.left + rect_test.width >= rect1->left + rect1->width) {
+    if (rect_test.left + rect_test.width > rect1->left + rect1->width) {
         rect1->left -= pos1->x;
         rect1->top -= pos1->y;
         rect2->left -= pos2->x;
         rect2->top -= pos2->y;
         return 2;
     }
-    if (rect_test.top <= rect1->top) {
+    if (rect_test.top < rect1->top) {
         rect1->left -= pos1->x;
         rect1->top -= pos1->y;
         rect2->left -= pos2->x;

@@ -2,6 +2,7 @@
 //gravity system (lol)
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "libdragon.h"
 #include "component.h"
 #include "rigid_body.h"
@@ -30,7 +31,7 @@ void sys_gravity(dg_entity_t *entity, dg_window_t *w,
         rb->strengh.y = 0;
     if (collisions[3] && rb->strengh.y > 0)
         rb->strengh.y = 0;
-    pos->x += rb->strengh.x * dt.microseconds / 10000;
-    pos->y += rb->strengh.y * dt.microseconds / 10000;
-    rb->strengh.y += rb->gravity * rb->mass * dt.microseconds;
+    pos->x += rb->strengh.x * dt.microseconds / 100000;
+    pos->y += rb->strengh.y * dt.microseconds / 100000;
+    rb->strengh.y += rb->gravity * rb->mass * dt.microseconds / 100000 * 9.81;
 }

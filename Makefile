@@ -7,6 +7,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/component/cpt_rigid_body.c \
 			src/game_src/system/sys_gravity.c \
 			src/game_src/rigid_body.c \
+			src/game_src/entities/ent_decor.c	\
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -14,7 +15,7 @@ MAIN_SRC	=	src/main.c 	\
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I./include -Wall -Wextra -Werror
+CFLAGS	=	-I./include -W -Wall -Wextra -Werror
 
 LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -ldragon
 
