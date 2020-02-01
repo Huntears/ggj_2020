@@ -21,7 +21,7 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
         if (tmp)
             collisions[tmp - 1] = 1;
     }
-    if (!dg_system_require(entity, 3, "animator", "sprite", "pos") || strcmp(entity->name, "player"))
+    if (!dg_system_require(entity, 3, "animator", "rigid_body", "box_collider") || strcmp(entity->name, "player"))
         return;
     if (sfKeyboard_isKeyPressed(sfKeyRight)) {
         rb->strengh.x = 20;
