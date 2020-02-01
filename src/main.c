@@ -20,7 +20,7 @@ int dg_loop(dg_window_t *w, void *var, sfTime dt)
 {
     data_t *v = ((data_t *)(var));
 
-    sfRenderWindow_clear(w->window, sfBlack);
+    sfRenderWindow_clear(w->window, sfColor_fromRGB(153, 204, 255));
     dg_scene_update(v->scene_game, w, dt);
     return 0;
 }
