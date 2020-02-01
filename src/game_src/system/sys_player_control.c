@@ -6,6 +6,7 @@
 #include "component.h"
 #include "inventory.h"
 #include "entity.h"
+#include "game.h"
 
 static dg_entity_t *touch_an_object(dg_entity_t *entity, dg_array_t **entities)
 {
@@ -21,13 +22,29 @@ static dg_entity_t *touch_an_object(dg_entity_t *entity, dg_array_t **entities)
     return 0;
 }
 
+static void player_grab(inventory_t *inv, dg_entity_t *entity, dg_array_t **entities, int is_left)
+{
+    dg_entity_t *touched = 0;
+
+    if (is_left && inv->left) {
+        ungrab(inv, entity, entities, 0);
+        return;
+    }
+    if (!is_left && inv->right) {
+        ungrab(inv, entity, entities, 1);
+        return;
+    }
+    touched = touch_an_object(entity, entities);
+    if (touched)
+        grab(inv, touched, entities, is_left);
+}
+
 void system_player_control(dg_entity_t *entity, dg_window_t *w,
     dg_array_t **entities, sfTime dt)
 {
     rigid_body_t *rb = (rigid_body_t *)(dg_entity_get_component(entity, "rigid_body"));
     dg_animator_t *animator = (dg_animator_t *)(dg_entity_get_component(entity, "animator"));
     inventory_t *inv = (inventory_t *)(dg_entity_get_component(entity, "inventory"));
-    dg_entity_t *touched = 0;
     int collisions[4] = {0};
     int tmp = 0;
 
@@ -52,10 +69,12 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
         dg_animator_set_animation(animator, "up");
     }
     if ((sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyW)|| sfKeyboard_isKeyPressed(sfKeySpace)) && collisions[3]) {
-        rb->strengh.y = -100;
+        rb->strengh.y = -64;
     }
-    touched = touch_an_object(entity, entities);
-    if (sfMouse_isButtonPressed(sfMouseLeft) && touched) {
-        grab(inv, touched, entities, 0);
+    if (key_is_down_left_mouse()) {
+        player_grab(inv, entity, entities, 1);
+    }
+    if (key_is_down_right_mouse()) {
+        player_grab(inv, entity, entities, 0);
     }
 }
