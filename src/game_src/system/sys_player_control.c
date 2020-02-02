@@ -59,17 +59,17 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w,
     if (!dg_system_require(entity, 4, "animator", "rigid_body", "box_collider", "box_trigger") || strcmp(entity->name, "player"))
         return;
     if (sfKeyboard_isKeyPressed(sfKeyRight) || sfKeyboard_isKeyPressed(sfKeyD)) {
-        rb->strengh.x = 40;
+        rb->strengh.x = 30;
         dg_animator_set_animation(animator, "right");
     } else if (sfKeyboard_isKeyPressed(sfKeyLeft) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyA)) {
-        rb->strengh.x = -40;
+        rb->strengh.x = -30;
         dg_animator_set_animation(animator, "left");
     } else {
         rb->strengh.x = 0;
         dg_animator_set_animation(animator, "up");
     }
     if ((sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyW)|| sfKeyboard_isKeyPressed(sfKeySpace)) && collisions[3]) {
-        rb->strengh.y = -64;
+        rb->strengh.y = -50;
     }
     if (key_is_down_left_mouse()) {
         player_grab(inv, entity, entities, 1);

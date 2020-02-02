@@ -43,6 +43,10 @@ void sys_gravity(dg_entity_t *entity, dg_window_t *w,
         rb->strengh.y = 0;
         pos->y += fdepth[3];
     }
+    if (rb->strengh.y > 55)
+        rb->strengh.y = 55;
+    if (rb->strengh.y < -55)
+        rb->strengh.y = -55;
     pos->x += rb->strengh.x * dt.microseconds / 100000;
     pos->y += rb->strengh.y * dt.microseconds / 100000;
     rb->strengh.y += rb->gravity * rb->mass * dt.microseconds / 100000 * 9.81;
