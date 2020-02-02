@@ -79,8 +79,13 @@ void *dg_init(dg_window_t *window)
 int dg_loop(dg_window_t *w, void *var, sfTime dt)
 {
     data_t *v = ((data_t *)(var));
+    static int i = 0;
 
     sfRenderWindow_clear(w->window, sfColor_fromRGB(153, 204, 255));
+    if (i == 0) {
+        dg_scene_add_ent(v->scene_game, ent_music("res/im_gonna_coom.ogg"));
+        i = 1;
+    }
     if (scene_id == 0) {
         if (stat)
             get_time_cpt(v->scene_game, v);
@@ -110,11 +115,6 @@ void dg_end(void *var, int id)
     (void)id;
     dg_scene_destroy(v->scene_game);
     dg_scene_destroy(v->scene_past);
-}
-
-static void play_music(void)
-{
-    dg_component_t *music = cpt_music("res/im_gonna_coom.ogg");
 }
 
 int main(void)
