@@ -11,6 +11,7 @@ dg_entity_t *ent_furret(int x, int y);
 dg_entity_t *ent_music(char *path);
 dg_entity_t *ent_warp_place(int x, int y);
 dg_entity_t *ent_ladder(int x, int y, int size, dg_spritesheet_t *ss);
+dg_entity_t *ent_box(char *, dg_spritesheet_t *, sfVector2f, sfVector2f);
 
 void grab(inventory_t *, dg_entity_t *, dg_array_t **, int);
 

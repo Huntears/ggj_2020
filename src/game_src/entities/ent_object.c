@@ -14,3 +14,12 @@ dg_entity_t *ent_object(char *key, dg_spritesheet_t *ss, sfVector2f pos, sfVecto
     dg_spritesheet_to_sprite(ss, sprite, 0);
     return entity;
 }
+
+dg_entity_t *ent_box(char *key, dg_spritesheet_t *ss, sfVector2f pos, sfVector2f size)
+{
+    dg_entity_t *entity = ent_object(key, ss, pos, size);
+
+    dg_entity_add_component(entity, cpt_rigid_body(1, 1));
+    dg_entity_add_component(entity, cpt_box_collider(0, 0, size.x * 2, size.y * 2));
+    return (entity);
+}
