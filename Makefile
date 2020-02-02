@@ -14,13 +14,21 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/entities/ent_decor.c	\
 			src/game_src/system/sys_player_control.c \
 			src/game_src/system/sys_camera_follow_player.c	\
-			src/game_src/system/sys_change_scene.c	\
+			src/game_src/system/sys_warp_zone.c	\
 			src/game_src/scene/scene_past.c	\
 			src/game_src/read_csv_from_file.c \
 			src/game_src/entities/ent_object.c \
 			src/game_src/component/cpt_box_trigger.c \
 			src/game_src/component/cpt_entity.c \
 			src/game_src/key_is_down.c \
+			src/game_src/entities/ent_warp_place.c	\
+			src/game_src/component/cpt_roping.c	\
+			src/game_src/component/cpt_spritesheet.c	\
+			src/game_src/entities/ent_ladder.c \
+			src/game_src/entities/ent_machine.c \
+			src/game_src/entities/ent_door.c \
+			src/game_src/system/sys_crafting.c	\
+			src/game_src/system/sys_win.c	\
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -28,7 +36,7 @@ MAIN_SRC	=	src/main.c 	\
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I./include -W -Wall -Wextra -Werror -g3
+CFLAGS	=	-I./include -W -Wall -Wextra -Werror
 
 LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -lcsfml-audio -ldragon
 

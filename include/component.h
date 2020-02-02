@@ -20,4 +20,9 @@ dg_component_t *cpt_catchable(void);
 dg_component_t *cpt_inventory(void);
 
 dg_component_t *cpt_music(char *path);
+
+dg_component_t *cpt_roping(int size);
+
+dg_component_t *cpt_spritesheet(dg_spritesheet_t *ss);
+
 #endif /* !COMPONENT_H_ */
