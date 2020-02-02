@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <stdio.h>
+#include <SFML/Audio.h>
 #include "game.h"
 #include "scene.h"
 #include "entity.h"
@@ -81,7 +82,10 @@ static void set_time_cpt(dg_scene_t *scene, data_t *v)
 void *dg_init(dg_window_t *window)
 {
     data_t *v = malloc(sizeof(data_t));
+    sfMusic *game_music = sfMusic_createFromFile("res/im_gonna_coom.ogg");
 
+    sfMusic_setLoop(game_music, sfTrue);
+    sfMusic_play(game_music);
     signal(SIGUSR1, change_scene);
     signal(SIGUSR2, win_and_change);
     (void)window;
