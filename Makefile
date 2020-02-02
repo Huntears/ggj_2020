@@ -23,6 +23,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/key_is_down.c \
 			src/game_src/entities/ent_warp_place.c	\
 			src/game_src/component/cpt_roping.c	\
+			src/game_src/entities/ent_ladder.c \
 
 OBJ 	=	$(SRC:.c=.o)
 

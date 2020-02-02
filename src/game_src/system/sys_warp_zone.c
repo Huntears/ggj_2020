@@ -4,6 +4,7 @@
 #include <string.h>
 #include "libdragon.h"
 #include "component.h"
+#include "rigid_body.h"
 
 static void teleport_time(void)
 {
@@ -14,6 +15,14 @@ static void teleport_time(void)
     else if (!released) {
         released = 1;
         raise(SIGUSR1);
+    }
+}
+
+static void teleport_ladder(dg_entity_t *entity)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyUp)) {
+    rigid_body_t *rb = (rigid_body_t *)(dg_entity_get_component(entity, "rigid_body"));
+    rb->strengh.y = -15;
     }
 }
 
@@ -29,6 +38,9 @@ void sys_warp_zone(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, s
         tmp = (dg_entity_t *) ent->data;
         if (!strcmp(tmp->name, "warp_place") && box_trigger_box(entity, tmp)) {
             teleport_time();
+        }
+        if (!strcmp(tmp->name, "ladder") && box_trigger_box(entity, tmp)) {
+            teleport_ladder(entity);
         }
     }
 }

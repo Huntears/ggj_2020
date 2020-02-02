@@ -12,6 +12,7 @@ dg_scene_t *scene_game_create(void)
     dg_scene_t *scene_game = dg_scene_create("game");
     int **map = read_csv_from_file("map/map_present.csv");
     dg_spritesheet_t *ss = dg_spritesheet_create("res/tileset01.png", 32, 32);
+    //dg_spritesheet_t *ss_lader = dg_spritesheet_create("res/ladder.png", 32, 32);
 
     if (!map)
         return (NULL);

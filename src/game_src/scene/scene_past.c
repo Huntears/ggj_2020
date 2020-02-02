@@ -12,6 +12,7 @@ dg_scene_t *scene_past_create(void)
     dg_scene_t *scene_game = dg_scene_create("past");
     int **map = read_csv_from_file("map/map_past.csv");
     dg_spritesheet_t *ss = dg_spritesheet_create("res/tileset01.png", 32, 32);
+    dg_spritesheet_t *ss_lader = dg_spritesheet_create("res/ladder.png", 32, 32);
 
     if (!map)
         return (NULL);
@@ -24,6 +25,8 @@ dg_scene_t *scene_past_create(void)
                 dg_scene_add_ent(scene_game, ent_decor(z * 32 * 2, i * 32 * 2, map[i][z], ss));
 
     dg_scene_add_ent(scene_game, dg_ent_camera(0, 0));
+    dg_scene_add_ent(scene_game, ent_ladder(280, 500, 19, ss_lader));
+    dg_scene_add_ent(scene_game, ent_ladder(446, 1100, 15, ss_lader));
 
     dg_scene_add_sys(scene_game, dg_system_create(&sys_gravity));
     dg_scene_add_sys(scene_game, dg_system_create(&sys_set_pos_sprite));
