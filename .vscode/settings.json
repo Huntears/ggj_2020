@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "libdragon.h": "c",
-        "dg_animator.h": "c",
-        "dg_entity.h": "c"
-    }
-}

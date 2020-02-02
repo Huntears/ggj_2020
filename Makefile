@@ -1,20 +1,6 @@
 SHELL	=	bash
 
-<<<<<<< Updated upstream
 SRC 	= src/game_src/scene/scene_game.c \
-=======
-SRC 	=	src/game_src/scene/scene_game.c \
-			src/game_src/component/cpt_box_collider.c \
-			src/game_src/entities/ent_player.c	\
-			src/game_src/system/sys_set_pos_sprite.c	\
-			src/game_src/component/cpt_rigid_body.c \
-			src/game_src/system/sys_gravity.c \
-			src/game_src/rigid_body.c \
-			src/game_src/entities/ent_decor.c	\
-			src/game_src/system/sys_player_control.c \
-			src/game_src/system/sys_camera_follow_player.c	\
-			src/game_src/read_csv_from_file.c
->>>>>>> Stashed changes
 
 OBJ 	=	$(SRC:.c=.o)
 
