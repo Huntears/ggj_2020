@@ -3,8 +3,8 @@
 
 #include "libdragon.h"
 
-dg_scene_t *scene_game_create(void);
+dg_scene_t *scene_level0_past(void);
 
-dg_scene_t *scene_past_create(void);
+dg_scene_t *scene_level0_present(void);
 
 #endif /* !SCENE_H_ */

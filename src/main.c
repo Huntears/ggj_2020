@@ -18,13 +18,13 @@ typedef struct data {
 
 static int scene_id = 0;
 
-static int stat = 0;
+static int stat = 1;
 
 static int level = 0;
 
-static dg_scene_t *(*present[1])(void) = {&scene_game_create};
+static dg_scene_t *(*present[1])(void) = {&scene_level0_present};
 
-static dg_scene_t *(*past[1])(void) = {&scene_past_create};
+static dg_scene_t *(*past[1])(void) = {&scene_level0_past};
 
 static void change_scene(int dummy)
 {
@@ -37,6 +37,7 @@ static void win_and_change(int dummy)
 {
     (void)dummy;
     stat = -1;
+    scene_id = 0;
     level++;
 }
 
@@ -87,7 +88,7 @@ void *dg_init(dg_window_t *window)
     (void)window;
     v->scene_game = present[0]();
     v->scene_past = past[0]();
-    v->player_pos = (sfVector2f){64,96};
+    v->player_pos = (sfVector2f){0};
     return v;
 }
 
@@ -136,6 +137,8 @@ void dg_end(void *var, int id)
         dg_scene_destroy(v->scene_game);
     if (v->scene_past)
         dg_scene_destroy(v->scene_past);
+    v->scene_game = present[level]();
+    v->scene_past = past[level]();
 }
 
 int main(void)

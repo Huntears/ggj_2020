@@ -14,4 +14,6 @@ void sys_camera_follow_player(dg_entity_t *entity, dg_window_t *w, dg_array_t **
     if (strcmp(entity->name, "camera") || !player)
         return;
     *pos_camera = (sfVector2f) {pos_player->x - 560, pos_player->y - 280};
+    if (sfKeyboard_isKeyPressed(sfKeyP))
+        printf("pos : %f.0:%f.0\n", pos_player->x, pos_player->y);
 }
