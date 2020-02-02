@@ -32,6 +32,8 @@ SRC 	=	src/game_src/component/cpt_box_collider.c \
 			src/menu/draw_menu.c \
 			src/menu/menu_creation.c \
 			src/menu/menu_loop.c \
+			src/game_src/scene/scene_level01_present.c \
+			src/game_src/scene/scene_level01_past.c \
 
 OBJ 	=	$(SRC:.c=.o)
 

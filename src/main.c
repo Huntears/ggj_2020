@@ -28,9 +28,9 @@ static int level = 0;
 
 static const int level_max = 2;
 
-static dg_scene_t *(*present[2])(void) = {&scene_level0_present, &scene_level0_present};
+static dg_scene_t *(*present[2])(void) = {&scene_level0_present, &scene_level01_present};
 
-static dg_scene_t *(*past[2])(void) = {&scene_level0_past, &scene_level0_past};
+static dg_scene_t *(*past[2])(void) = {&scene_level0_past, &scene_level01_past};
 
 static void change_scene(int dummy)
 {

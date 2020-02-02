@@ -7,4 +7,8 @@ dg_scene_t *scene_level0_past(void);
 
 dg_scene_t *scene_level0_present(void);
 
+dg_scene_t *scene_level01_past(void);
+
+dg_scene_t *scene_level01_present(void);
+
 #endif /* !SCENE_H_ */
