@@ -4,6 +4,7 @@
 #include "game.h"
 #include "scene.h"
 #include "entity.h"
+#include "component.h"
 #include "libdragon.h"
 #include "rigid_body.h"
 
@@ -111,8 +112,14 @@ void dg_end(void *var, int id)
     dg_scene_destroy(v->scene_past);
 }
 
+static void play_music(void)
+{
+    dg_component_t *music = cpt_music("res/im_gonna_coom.ogg");
+}
+
 int main(void)
 {
+    play_music();
     dg_play(1280, 720, "Gamejam 2020", 0);
     return 0;
 }
