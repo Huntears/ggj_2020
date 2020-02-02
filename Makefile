@@ -24,6 +24,7 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/entities/ent_warp_place.c	\
 			src/game_src/component/cpt_roping.c	\
 			src/game_src/entities/ent_ladder.c \
+			src/game_src/system/sys_crafting.c	\
 
 OBJ 	=	$(SRC:.c=.o)
 
@@ -31,7 +32,7 @@ MAIN_SRC	=	src/main.c 	\
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I./include -W -Wall -Wextra -Werror -g3
+CFLAGS	=	-I./include -W -Wall -Wextra -Werror
 
 LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -lcsfml-audio -ldragon
 
