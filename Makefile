@@ -23,8 +23,12 @@ SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/key_is_down.c \
 			src/game_src/entities/ent_warp_place.c	\
 			src/game_src/component/cpt_roping.c	\
+			src/game_src/component/cpt_spritesheet.c	\
 			src/game_src/entities/ent_ladder.c \
+			src/game_src/entities/ent_machine.c \
+			src/game_src/entities/ent_door.c \
 			src/game_src/system/sys_crafting.c	\
+			src/game_src/system/sys_win.c	\
 
 OBJ 	=	$(SRC:.c=.o)
 

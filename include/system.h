@@ -9,5 +9,6 @@ void system_player_control(dg_entity_t *entity, dg_window_t *w, dg_array_t **ent
 void sys_camera_follow_player(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, sfTime dt);
 void sys_warp_zone(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, sfTime dt);
 void sys_crafting(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, sfTime dt);
+void sys_win(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, sfTime dt);
 
 #endif /* !SYSTEM_H_ */

@@ -19,4 +19,9 @@ void sys_crafting(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities, sf
         inv->right = 0;
         return;
     }
+    if ((!strcmp(inv->left->name, "plank") && !strcmp(inv->right->name, "plank"))  && sfMouse_isButtonPressed(sfMouseMiddle)) {
+        inv->left = ent_box("tha_crate", dg_spritesheet_create("./res/crate.png", 32, 32), (sfVector2f) {600, 400}, (sfVector2f) {32, 32});
+        inv->right = 0;
+        return;
+    }
 }
