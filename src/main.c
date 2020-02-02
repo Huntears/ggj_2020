@@ -14,15 +14,30 @@ typedef struct data {
     sfVector2f player_strengh;
 } data_t;
 
+
+
 static int scene_id = 0;
 
 static int stat = 0;
+
+static int level = 0;
+
+static dg_scene_t *(*present[1])(void) = {&scene_game_create};
+
+static dg_scene_t *(*past[1])(void) = {&scene_past_create};
 
 static void change_scene(int dummy)
 {
     (void)dummy;
     stat = 0;
     scene_id = (scene_id) ? 0 : 1;
+}
+
+static void win_and_change(int dummy)
+{
+    (void)dummy;
+    stat = -1;
+    level++;
 }
 
 static void add_furret(data_t *v)
@@ -68,9 +83,10 @@ void *dg_init(dg_window_t *window)
     data_t *v = malloc(sizeof(data_t));
 
     signal(SIGUSR1, change_scene);
+    signal(SIGUSR2, win_and_change);
     (void)window;
-    v->scene_game = scene_game_create();
-    v->scene_past = scene_past_create();
+    v->scene_game = present[0]();
+    v->scene_past = past[0]();
     v->player_pos = (sfVector2f){64,96};
     return v;
 }
@@ -80,25 +96,34 @@ int dg_loop(dg_window_t *w, void *var, sfTime dt)
     data_t *v = ((data_t *)(var));
 
     sfRenderWindow_clear(w->window, sfColor_fromRGB(153, 204, 255));
-    if (scene_id == 0) {
-        if (stat)
-            get_time_cpt(v->scene_game, v);
-        else {
-            stat = 1;
-            set_time_cpt(v->scene_game, v);
+
+    if (stat >= 0) {
+        if (scene_id == 0) {
+            if (stat)
+                get_time_cpt(v->scene_game, v);
+            else {
+                stat = 1;
+                set_time_cpt(v->scene_game, v);
+            }
+            dg_scene_update(v->scene_game, w, dt);
         }
-        dg_scene_update(v->scene_game, w, dt);
-    }
-    else {
-        if (stat)
-            get_time_cpt(v->scene_past, v);
         else {
-            stat = 1;
-            set_time_cpt(v->scene_past, v);
+            if (stat)
+                get_time_cpt(v->scene_past, v);
+            else {
+                stat = 1;
+                set_time_cpt(v->scene_past, v);
+            }
+            dg_scene_update(v->scene_past, w, dt);
         }
-        dg_scene_update(v->scene_past, w, dt);
+        add_furret(v);
+    } else {
+        stat = 1;
+        dg_scene_destroy(v->scene_game);
+        dg_scene_destroy(v->scene_past);
+        v->scene_game = 0;
+        v->scene_past = 0;
     }
-    add_furret(v);
     return 0;
 }
 
@@ -107,8 +132,10 @@ void dg_end(void *var, int id)
     data_t *v = ((data_t *)(var));
 
     (void)id;
-    dg_scene_destroy(v->scene_game);
-    dg_scene_destroy(v->scene_past);
+    if (v->scene_game)
+        dg_scene_destroy(v->scene_game);
+    if (v->scene_past)
+        dg_scene_destroy(v->scene_past);
 }
 
 int main(void)
