@@ -29,6 +29,8 @@ SRC 	=	src/game_src/component/cpt_box_collider.c \
 			src/game_src/system/sys_win.c	\
 			src/game_src/scene/scene_level0_present.c \
 			src/game_src/scene/scene_level0_past.c \
+			src/game_src/scene/scene_level01_present.c \
+			src/game_src/scene/scene_level01_past.c \
 
 OBJ 	=	$(SRC:.c=.o)
 
