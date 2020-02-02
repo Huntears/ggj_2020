@@ -28,6 +28,7 @@ dg_scene_t *scene_past_create(void)
     dg_scene_add_sys(scene_game, dg_system_create(&sys_set_pos_sprite));
     dg_scene_add_sys(scene_game, dg_system_create(sys_camera_follow_player));
     dg_scene_add_sys(scene_game, dg_system_create(sys_change_scene));
+    dg_scene_add_sys(scene_game, dg_system_create(sys_crafting));
 
     dg_scene_add_sys(scene_game, dg_system_create(&dg_sys_animator));
     dg_scene_add_sys(scene_game, dg_system_create(&dg_sys_render));
