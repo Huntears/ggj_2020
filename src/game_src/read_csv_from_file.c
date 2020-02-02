@@ -90,8 +90,10 @@ int **read_csv_from_file(char *filepath)
         content[x] = remove_spaces_from_str(content[x]);
     csv = malloc(sizeof(int *) * (x + 1));
     for (int y = 0; content[y]; y++) {
-        for (int z = 0, x = 1; content[y][z]; z++)
+        x = 1;
+        for (int z = 0; content[y][z]; z++) {
             x += (content[y][z] == ',') ? 1 : 0;
+        }
         csv[y] = malloc(sizeof(int) * (x + 2));
     }
     for (; content[i]; i++) {

@@ -20,7 +20,7 @@ static void teleport_time(void)
 
 static void teleport_ladder(dg_entity_t *entity)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyUp)) {
+    if ((sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyW)|| sfKeyboard_isKeyPressed(sfKeySpace))) {
     rigid_body_t *rb = (rigid_body_t *)(dg_entity_get_component(entity, "rigid_body"));
     rb->strengh.y = -15;
     }
