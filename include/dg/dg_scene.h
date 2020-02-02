@@ -22,6 +22,8 @@ typedef struct dg_scene
 
 dg_scene_t *dg_scene_create(char *);
 
+void dg_scene_adde_ent(dg_scene_t *, dg_entity_t *);
+
 void dg_scene_add_ent(dg_scene_t *, dg_entity_t *);
 
 void dg_scene_add_sys(dg_scene_t *, dg_system_t *);

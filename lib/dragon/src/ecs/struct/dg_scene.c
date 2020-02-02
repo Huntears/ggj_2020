@@ -21,6 +21,13 @@ dg_scene_t *dg_scene_create(char *name)
     return scene;
 }
 
+void dg_scene_adde_ent(dg_scene_t *scene, dg_entity_t *entity)
+{
+    if (!scene || !entity)
+        return;
+    dg_arr_add_end(&(scene->entities), entity);
+}
+
 void dg_scene_add_ent(dg_scene_t *scene, dg_entity_t *entity)
 {
     if (!scene || !entity)

@@ -3,9 +3,12 @@ SHELL	=	bash
 SRC 	=	src/game_src/scene/scene_game.c \
 			src/game_src/component/cpt_box_collider.c \
 			src/game_src/entities/ent_player.c	\
+			src/game_src/entities/ent_furret.c	\
+			src/game_src/entities/ent_music.c	\
 			src/game_src/system/sys_set_pos_sprite.c	\
 			src/game_src/component/cpt_rigid_body.c \
 			src/game_src/component/cpt_catchable.c \
+			src/game_src/component/cpt_music.c \
 			src/game_src/system/sys_gravity.c \
 			src/game_src/rigid_body.c \
 			src/game_src/entities/ent_decor.c	\
@@ -27,7 +30,7 @@ MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
 CFLAGS	=	-I./include -W -Wall -Wextra -Werror -g3
 
-LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -ldragon
+LFLAGS	=	-L./lib -lcsfml-graphics -lcsfml-system -lcsfml-window -lcsfml-audio -ldragon
 
 TARGET	=	game
 

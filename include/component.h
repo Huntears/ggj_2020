@@ -19,4 +19,5 @@ dg_component_t *cpt_catchable(void);
 
 dg_component_t *cpt_inventory(void);
 
+dg_component_t *cpt_music(char *path);
 #endif /* !COMPONENT_H_ */

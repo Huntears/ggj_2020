@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "game.h"
 #include "scene.h"
+#include "entity.h"
 #include "libdragon.h"
 
 typedef struct data {
@@ -38,6 +39,14 @@ int dg_loop(dg_window_t *w, void *var, sfTime dt)
         dg_scene_update(v->scene_game, w, dt);
     else
         dg_scene_update(v->scene_past, w, dt);
+    if (sfKeyboard_isKeyPressed(sfKeyF)) {
+        dg_entity_t *camera = dg_get_entity(v->scene_game->entities, "camera");
+        sfVector2f *pos = dg_entity_get_component(camera, "pos");
+        dg_entity_t *camera2 = dg_get_entity(v->scene_past->entities, "camera");
+        sfVector2f *pos2 = dg_entity_get_component(camera2, "pos");
+        dg_scene_adde_ent(v->scene_game, ent_furret(pos->x, pos->y));
+        dg_scene_adde_ent(v->scene_past, ent_furret(pos2->x, pos2->y));
+    }
     return 0;
 }
 
