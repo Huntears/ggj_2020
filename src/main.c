@@ -7,12 +7,15 @@
 #include "entity.h"
 #include "libdragon.h"
 #include "rigid_body.h"
+#include "menu_struct.h"
 
 typedef struct data {
     dg_scene_t *scene_game;
     dg_scene_t *scene_past;
+    menu_t *menu;
     sfVector2f player_pos;
     sfVector2f player_strengh;
+    int scene_stat;
 } data_t;
 
 
@@ -95,16 +98,14 @@ void *dg_init(dg_window_t *window)
     v->scene_game = present[0]();
     v->scene_past = past[0]();
     v->player_pos = (sfVector2f){0};
+    v->scene_stat = 0;
+    v->menu = load_menu(window->window);
     return v;
 }
 
-int dg_loop(dg_window_t *w, void *var, sfTime dt)
+int play_game(dg_window_t *w, data_t *v, sfTime dt)
 {
-    data_t *v = ((data_t *)(var));
-
-    sfRenderWindow_clear(w->window, sfColor_fromRGB(153, 204, 255));
-
-    if (stat >= 0) {
+       if (stat >= 0) {
         if (scene_id == 0) {
             if (stat)
                 get_time_cpt(v->scene_game, v);
@@ -136,6 +137,20 @@ int dg_loop(dg_window_t *w, void *var, sfTime dt)
         } else
             exit(0);
     }
+    return 0; 
+}
+int dg_loop(dg_window_t *w, void *var, sfTime dt)
+{
+    data_t *v = ((data_t *)(var));
+
+    sfRenderWindow_clear(w->window, sfColor_fromRGB(153, 204, 255));
+
+    if (v->scene_stat == 0) {
+        v->scene_stat = menu_loop(v->menu);
+    } else if (v->scene_stat == 1)
+        play_game(w, v, dt);
+    else
+        exit (0);
     return 0;
 }
 

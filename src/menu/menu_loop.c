@@ -34,7 +34,7 @@ int get_menu_event(menu_t *menu)
     while (sfRenderWindow_pollEvent(menu->w, &evt)) {
         if (evt.type == sfEvtClosed)
             sfRenderWindow_close(menu->w);
-        if (evt.type == sfEvtMouseButtonPressed && evt.type == evt.mouseButton.button == sfMouseLeft)
+        if (evt.type == sfEvtMouseButtonPressed && evt.mouseButton.button == sfMouseLeft)
             ret = check_button_hitbox(menu);
     }
     return (ret);
@@ -44,9 +44,9 @@ int menu_loop(menu_t *menu)
 {
     int ret = 0;
 
-    ret = get_menu_event(menu);
-    draw_menu(menu);
-    if (ret == 0)
-        menu_loop(menu);
+    while (ret == 0) {
+        ret = get_menu_event(menu);
+        draw_menu(menu);
+    }
     return (ret);
 }
