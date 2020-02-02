@@ -26,6 +26,23 @@ static int is_in_screen(sfSprite *sprite, sfVector2f camera, dg_window_t *w)
     return stat;
 }
 
+static void display_roping(dg_entity_t *entity, dg_window_t *w)
+{
+    sfVector2f *pos = (sfVector2f *)(dg_entity_get_component(entity, "pos"));
+    sfSprite *sprite = (sfSprite *)(dg_entity_get_component(entity, "sprite"));
+    int *size = (int *)(dg_entity_get_component(entity, "roping"));
+    sfIntRect size_size = {0};
+
+    if (!size)
+        return;
+    for (int i = 1; i < *size; i++) {
+        size_size = sfSprite_getTextureRect(sprite);
+        sfSprite_move(sprite, (sfVector2f){0, size_size.height});
+        sfRenderWindow_drawSprite(w->window, sprite, NULL);
+    }
+    sfSprite_move(sprite, (sfVector2f){0, -size_size.height * *size});
+}
+
 static void display_sprite(sfVector2f camera, dg_entity_t *entity,
     dg_window_t *w)
 {
@@ -34,9 +51,12 @@ static void display_sprite(sfVector2f camera, dg_entity_t *entity,
 
     if (dg_system_require(entity, 1, "sprite")) {
             sprite = (sfSprite *)(dg_entity_get_component(entity, "sprite"));
-            if (is_in_screen(sprite, camera, w)) {
+            if (is_in_screen(sprite, camera, w) || dg_entity_has_component(entity, "roping") != -1) {
                 sfSprite_move(sprite, reverse);
-                sfRenderWindow_drawSprite(w->window, sprite, NULL);
+                if (dg_entity_has_component(entity, "roping") != -1)
+                    display_roping(entity, w);
+                else
+                    sfRenderWindow_drawSprite(w->window, sprite, NULL);
                 sfSprite_move(sprite, camera);
             }
         }

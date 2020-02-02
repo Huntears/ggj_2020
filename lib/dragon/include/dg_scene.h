@@ -15,12 +15,14 @@
 
 typedef struct dg_scene
 {
-    sfVector2f camera;
+    char *name;
     dg_array_t *entities;
     dg_array_t *systems;
 } dg_scene_t;
 
-dg_scene_t *dg_scene_create();
+dg_scene_t *dg_scene_create(char *);
+
+void dg_scene_adde_ent(dg_scene_t *, dg_entity_t *);
 
 void dg_scene_add_ent(dg_scene_t *, dg_entity_t *);
 
