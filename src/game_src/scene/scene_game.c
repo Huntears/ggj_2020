@@ -20,8 +20,9 @@ dg_scene_t *scene_game_create(void)
     dg_scene_add_ent(scene_game, ent_player(100, 100));
     dg_scene_add_ent(scene_game, ent_warp_place(500, 500));
     dg_scene_add_ent(scene_game, ent_warp_place(200, 200));
-    dg_scene_add_ent(scene_game, ent_object("broken_cog_right", dg_spritesheet_create("./res/cog_right.png", 32, 32), (sfVector2f) {500, 500}, (sfVector2f) {64, 64}));
-    dg_scene_add_ent(scene_game, ent_object("broken_cog_left", dg_spritesheet_create("./res/cog_left.png", 32, 32), (sfVector2f) {600, 500}, (sfVector2f) {64, 64}));
+    dg_scene_add_ent(scene_game, ent_object("broken_cog_right", dg_spritesheet_create("./res/cog_right.png", 32, 32), (sfVector2f) {500, 500}, (sfVector2f) {32, 32}));
+    dg_scene_add_ent(scene_game, ent_object("broken_cog_left", dg_spritesheet_create("./res/cog_left.png", 32, 32), (sfVector2f) {600, 500}, (sfVector2f) {32, 32}));
+    dg_scene_add_ent(scene_game, ent_box("tha_crate", dg_spritesheet_create("./res/box.png", 32, 32), (sfVector2f) {600, 400}, (sfVector2f) {32, 32}));
 
     for (int i = 0; map[i][0] != -3; i++)
         for (int z = 0; map[i][z] != -2; z++)
