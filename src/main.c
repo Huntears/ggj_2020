@@ -22,9 +22,11 @@ static int stat = 1;
 
 static int level = 0;
 
-static dg_scene_t *(*present[1])(void) = {&scene_level0_present};
+static const int level_max = 2;
 
-static dg_scene_t *(*past[1])(void) = {&scene_level0_past};
+static dg_scene_t *(*present[2])(void) = {&scene_level0_present, &scene_level0_present};
+
+static dg_scene_t *(*past[2])(void) = {&scene_level0_past, &scene_level0_past};
 
 static void change_scene(int dummy)
 {
@@ -124,6 +126,11 @@ int dg_loop(dg_window_t *w, void *var, sfTime dt)
         dg_scene_destroy(v->scene_past);
         v->scene_game = 0;
         v->scene_past = 0;
+        if (level < level_max) {
+            v->scene_game = present[level]();
+            v->scene_past = past[level]();
+        } else
+            exit(0);
     }
     return 0;
 }
@@ -137,8 +144,6 @@ void dg_end(void *var, int id)
         dg_scene_destroy(v->scene_game);
     if (v->scene_past)
         dg_scene_destroy(v->scene_past);
-    v->scene_game = present[level]();
-    v->scene_past = past[level]();
 }
 
 int main(void)
