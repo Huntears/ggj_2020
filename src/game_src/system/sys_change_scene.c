@@ -10,7 +10,7 @@ void sys_change_scene(dg_entity_t *entity, dg_window_t *w, dg_array_t **entities
     (void)dt;
     static int released = 0;
 
-    if (!sfKeyboard_isKeyPressed(sfKeySpace))
+    if (!sfKeyboard_isKeyPressed(sfKeyE))
         released = 0;
     else if (!released) {
         released = 1;

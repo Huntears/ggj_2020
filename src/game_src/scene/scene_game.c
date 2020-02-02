@@ -10,7 +10,8 @@ int **read_csv_from_file(char *filepath);
 dg_scene_t *scene_game_create(void)
 {
     dg_scene_t *scene_game = dg_scene_create("game");
-    int **map = read_csv_from_file("map/mapok.csv");
+    int **map = read_csv_from_file("map/map_present.csv");
+    dg_spritesheet_t *ss = dg_spritesheet_create("res/tileset01.png", 32, 32);
 
     if (!map)
         return (NULL);
@@ -20,7 +21,7 @@ dg_scene_t *scene_game_create(void)
     for (int i = 0; map[i][0] != -3; i++)
         for (int z = 0; map[i][z] != -2; z++)
             if (map[i][z] >= 0)
-                dg_scene_add_ent(scene_game, ent_decor(z * 32 * 3, i * 32 * 3, map[i][z]));
+                dg_scene_add_ent(scene_game, ent_decor(z * 32 * 2, i * 32 * 2, map[i][z], ss));
 
     dg_scene_add_ent(scene_game, dg_ent_camera(0, 0));
 
