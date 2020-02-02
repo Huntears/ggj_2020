@@ -113,6 +113,6 @@ void dg_end(void *var, int id)
 
 int main(void)
 {
-    dg_play(1280, 720, "Gamejam 2020", 0);
+    dg_play(1280, 720, "bob.changerLeTemps()", 0);
     return 0;
 }
