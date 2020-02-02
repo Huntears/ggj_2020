@@ -17,6 +17,7 @@ dg_scene_t *scene_game_create(void)
         return (NULL);
     dg_scene_add_ent(scene_game, ent_object("star", dg_spritesheet_create("res/time_light.png", 32, 32), (sfVector2f){100,150}, (sfVector2f) {32, 32}));
     dg_scene_add_ent(scene_game, ent_player(100, 100));
+    dg_scene_add_ent(scene_game, ent_warp_place(200, 200));
 
     for (int i = 0; map[i][0] != -3; i++)
         for (int z = 0; map[i][z] != -2; z++)
